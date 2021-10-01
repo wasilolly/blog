@@ -1,0 +1,17 @@
+body{
+    background: white;
+    color: black;
+    max-width: 600px;
+    margin: auto;
+    font-family: helvetica;
+}
+
+p{
+    line-height: 1.4;
+}
+
+article + article{
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid goldenrod;
+}
