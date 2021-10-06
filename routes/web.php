@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
 
 
 /*
@@ -18,14 +20,27 @@ use App\Models\Post;
 Route::get('/', function () {
  
     return view('posts', [
-        'posts' => $posts = Post::allPosts()
+        'posts' => Post::latest()->get(),
+        'categories' => Category::all()
     ]);
 });
 
-Route::get('/posts/{post}', function($slug) {
+Route::get('/posts/{post:slug}', function(Post $post) {
     return view('post',[   
-        'post' => $post = Post::findPost($slug)
+        'post' => $post 
     ]);
-})->where('post', '[A-z_\-]+');
+});
+
+Route::get('/categories/{category:slug}', function(Category $category) {
+    return view('posts',[   
+        'posts' => $category->posts
+    ]);
+});
+
+Route::get('/authors/{author:username}', function(User $author) {
+    return view('posts',[   
+        'posts' => $author->posts
+    ]);
+});
     
    
