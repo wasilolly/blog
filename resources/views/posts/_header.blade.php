@@ -12,7 +12,8 @@
                 </a>
 
                 @foreach ($categories as $category)
-                    <a href="/categories/{{ $category->slug }}"
+                    <a href="/?category={{ $category->slug }}"
+                        :active='request()->is("categories/{$category->slug}")'
                         class="block text-left px-3 text-small leading-6 hover:bg-blue-300 focus:bg-gray-300 hover:text-white">{{ ucwords($category->name) }}
                     </a>
                 @endforeach
