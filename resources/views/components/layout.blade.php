@@ -16,16 +16,24 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
-
+            <div class="mt-8 md:mt-0 inline-flex">
+                @auth
+                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->username }}</span>
+                    <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
+                        @csrf
+                        <button type="submit">logout</button>
+                    </form>
+                @else
+                    <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                    <a href="/login" class="ml-3 text-xs font-bold uppercase">Login</a>
+                @endauth
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
             </div>
         </nav>
 
-        {{ $slot}}
+        {{ $slot }}
 
         <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
             <img src="./images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
@@ -42,12 +50,11 @@
                             </label>
 
                             <input id="email" type="text" placeholder="Your email address"
-                                   class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
+                                class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
                         </div>
 
                         <button type="submit"
-                                class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8"
-                        >
+                            class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
                             Subscribe
                         </button>
                     </form>
@@ -55,4 +62,10 @@
             </div>
         </footer>
     </section>
+    @if (session()->has('success'))
+        <div x-data="{ show:true}" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+            class="fixed bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 text-sm">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
 </body>
