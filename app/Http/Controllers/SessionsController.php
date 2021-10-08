@@ -21,7 +21,7 @@ class SessionsController extends Controller
             return redirect('/')->with('success', 'Welcome Back!');
         }
         return back()->withInput()
-                    ->withErrors(['email' => 'credentials could not be verified']);
+            ->withErrors(['email' => 'credentials could not be verified']);
     }
     public function destroy()
     {
