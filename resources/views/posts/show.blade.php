@@ -5,8 +5,11 @@
             <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
                 <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                     <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-                        <img src="/images/illustration-1.png" alt="" class="rounded-xl">
-
+                        @if ($post->thumbnail)
+                        <img src="{{asset('storage/'.$post->thumbnail)}}" alt="" class="rounded-xl">
+                        @else
+                        <img src="/images/illustration-3.png" alt="" class="rounded-xl">
+                        @endif
                         <p class="mt-4 block text-gray-400 text-xs">
                             Published <time>{{ $post->created_at->diffForHumans() }}</time>
                         </p>
@@ -40,7 +43,7 @@
                             </a>
 
                             <div class="space-x-2">
-                                <a href="/categories/{{ $post->category->slug }}"
+                                <a href="/?category={{ $post->category->slug }}"
                                     class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
                                     style="font-size: 10px">{{ $post->category->name }}</a>
 

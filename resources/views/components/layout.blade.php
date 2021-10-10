@@ -17,12 +17,24 @@
             </div>
 
             <div class="mt-8 md:mt-0 inline-flex">
+
                 @auth
-                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->username }}</span>
-                    <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
-                        @csrf
-                        <button type="submit">logout</button>
-                    </form>
+                    <div x-data="{ show: false }" @click.away="show = false">
+                        <button @click="show = !show" class="">
+                            <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->username }}</span>
+                        </button>
+                        <div x-show="show" class="py-2 absolute bg-gray-100 mt-2 rounded-xl"
+                            style="display:none;">
+                            <a href="/admin/posts"
+                                class="block text-left px-8 text-small leading-6 hover:bg-blue-300 focus:bg-gray-300 hover:text-white">
+                                Dashboard
+                            </a>
+                            <form action="/logout" method="post" class="block text-left px-8 text-small leading-6 hover:bg-blue-300 focus:bg-gray-300 hover:text-white">
+                                @csrf
+                                <button type="submit">Logout</button>
+                            </form>
+                        </div>
+                    </div>
                 @else
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="ml-3 text-xs font-bold uppercase">Login</a>
@@ -36,7 +48,7 @@
         {{ $slot }}
 
         <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
-            <img src="./images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
+            <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
             <h5 class="text-3xl">Stay in touch with the latest posts</h5>
             <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
@@ -46,7 +58,7 @@
                     <form method="POST" action="#" class="lg:flex text-sm">
                         <div class="lg:py-3 lg:px-5 flex items-center">
                             <label for="email" class="hidden lg:inline-block">
-                                <img src="./images/mailbox-icon.svg" alt="mailbox letter">
+                                <img src="/images/mailbox-icon.svg" alt="mailbox letter">
                             </label>
 
                             <input id="email" type="text" placeholder="Your email address"
