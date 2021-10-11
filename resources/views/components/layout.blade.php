@@ -25,10 +25,12 @@
                         </button>
                         <div x-show="show" class="py-2 absolute bg-gray-100 mt-2 rounded-xl"
                             style="display:none;">
+                            @admin                        
                             <a href="/admin/posts"
                                 class="block text-left px-8 text-small leading-6 hover:bg-blue-300 focus:bg-gray-300 hover:text-white">
                                 Dashboard
                             </a>
+                            @endadmin
                             <form action="/logout" method="post" class="block text-left px-8 text-small leading-6 hover:bg-blue-300 focus:bg-gray-300 hover:text-white">
                                 @csrf
                                 <button type="submit">Logout</button>
