@@ -2,7 +2,7 @@
 <ul>
     <li>CRUD action on posts and categories</li>
     <li>CMS style settings</li>
-<li>Filter by authors and categories<li>
+<li>Filter by authors and categories</li>
 <li>Email Newsletter</li>
     <li>Admin dashboard to summarize actions</li>
  </ul>
